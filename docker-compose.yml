@@ -16,7 +16,22 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks: 
+      - inside_networks 
+  redis:
+    build: ./redis_docker
+    ports: 
+      - "6379:6379"
+    networks: 
+      - inside_networks
+  postgres:
+    build: ./postgres-docker
+    environment: 
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+    networks: 
       - inside_networks  
+
 
 networks: 
   inside_networks:      
